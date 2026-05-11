@@ -57,7 +57,7 @@ export default function FirmSettingsPage() {
   const apiBase = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
   function authHeaders(): Record<string, string> {
-    const token = typeof window !== "undefined" ? localStorage.getItem("access_token") : null;
+    const token = typeof window !== "undefined" ? localStorage.getItem("taxintel_token") : null;
     return token ? { Authorization: `Bearer ${token}` } : {};
   }
 

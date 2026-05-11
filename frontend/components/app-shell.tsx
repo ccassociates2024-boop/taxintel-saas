@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
-import { BarChart3, FileUp, LayoutDashboard, LogOut, Moon, Sparkles, Sun, Users } from "lucide-react";
+import { BarChart3, Building2, FileUp, LayoutDashboard, LogOut, Moon, Sparkles, Sun, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -12,7 +12,8 @@ const nav = [
   { href: "/clients", label: "Clients", icon: Users },
   { href: "/uploads", label: "Uploads", icon: FileUp },
   { href: "/recommendations", label: "Recommendations", icon: Sparkles },
-  { href: "/reports", label: "Reports", icon: BarChart3 }
+  { href: "/reports", label: "Reports", icon: BarChart3 },
+  { href: "/settings/firm", label: "Firm Settings", icon: Building2 },
 ];
 
 export function AppShell({ children }: { children: React.ReactNode }) {

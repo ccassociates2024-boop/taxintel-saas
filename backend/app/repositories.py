@@ -134,6 +134,21 @@ class TaxRepository:
             .order_by(desc(Form26ASRecord.created_at))
         )
 
+    def latest_computation(self, tenant_id: UUID, client_id: UUID) -> TaxComputation | None:
+        return self.db.scalar(
+            select(TaxComputation)
+            .where(TaxComputation.tenant_id == tenant_id, TaxComputation.client_id == client_id)
+            .order_by(desc(TaxComputation.created_at))
+        )
+
+    def latest_recommendations(self, tenant_id: UUID, client_id: UUID) -> list[Recommendation]:
+        return list(self.db.scalars(
+            select(Recommendation)
+            .where(Recommendation.tenant_id == tenant_id, Recommendation.client_id == client_id)
+            .order_by(desc(Recommendation.created_at))
+            .limit(10)
+        ))
+
     def save_computation(self, computation: TaxComputation) -> TaxComputation:
         self.db.add(computation)
         self.db.commit()

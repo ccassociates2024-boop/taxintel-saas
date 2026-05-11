@@ -17,8 +17,8 @@ def register(payload: RegisterRequest, db: Session = Depends(get_db)):
 
     # Auto-create a tenant for this CA firm; place_of_supply defaults to Delhi (07)
     tenant = TenantRepository(db).create(
-        legal_name=payload.full_name,
-        trade_name=payload.full_name,
+        legal_name=getattr(payload, "legal_name", None) or payload.full_name,
+        trade_name=getattr(payload, "trade_name", None) or payload.full_name,
         billing_email=payload.email,
     )
     user = repo.create(payload.email, payload.password, payload.full_name, payload.role, tenant.id)

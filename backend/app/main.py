@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 import os
+from pathlib import Path
 
 import structlog
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 from slowapi import Limiter
 from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
@@ -129,6 +131,21 @@ def create_app() -> FastAPI:
     app.include_router(digilocker.router,      prefix=prefix)
     # Phase 1E
     app.include_router(whatsapp.router,        prefix=prefix)
+
+    # ── Local static file server for uploaded files ─────────────────────────
+    # In production files are served via S3 signed URLs.  In local dev the
+    # storage backend writes to LOCAL_STORAGE_DIR and returns URLs of the form
+    # http://localhost:8000/api/v1/files/{key}.  Mount the directory so those
+    # URLs resolve without a separate MinIO/S3 instance.
+    if settings.app_env == "local":
+        local_dir = Path(os.environ.get("LOCAL_STORAGE_DIR", "local_uploads"))
+        local_dir.mkdir(parents=True, exist_ok=True)
+        app.mount(
+            "/api/v1/files",
+            StaticFiles(directory=str(local_dir), html=False),
+            name="local_files",
+        )
+        log.info("local_file_server.mounted", directory=str(local_dir))
 
     log.info("app.created", env=settings.app_env)
     return app

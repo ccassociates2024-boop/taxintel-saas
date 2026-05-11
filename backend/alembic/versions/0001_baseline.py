@@ -39,9 +39,9 @@ def upgrade() -> None:
         sa.Column("id", postgresql.UUID(as_uuid=True), primary_key=True, server_default=sa.text("uuid_generate_v4()")),
         sa.Column("owner_id", postgresql.UUID(as_uuid=True), sa.ForeignKey("users.id", ondelete="CASCADE"), nullable=False),
         sa.Column("full_name", sa.String(180), nullable=False),
-        sa.Column("pan", sa.String(10), nullable=False),
-        sa.Column("email", sa.String(255)),
-        sa.Column("phone", sa.String(32)),
+        sa.Column("pan", sa.String(512), nullable=False),   # Fernet-encrypted PAN
+        sa.Column("email", sa.String(512)),                  # Fernet-encrypted email
+        sa.Column("phone", sa.String(512)),                  # Fernet-encrypted phone
         sa.Column("residential_status", sa.String(48), nullable=False, server_default="RESIDENT"),
         sa.Column("client_type", sa.String(48), nullable=False, server_default="INDIVIDUAL"),
         sa.Column("created_at", sa.DateTime, nullable=False, server_default=sa.text("now()")),
