@@ -21,4 +21,4 @@ EXPOSE 8000
 
 # Run Alembic migrations then start the API server.
 # The only DDL path is alembic upgrade head — never Base.metadata.create_all().
-CMD ["sh", "-c", "echo '=== Testing app import ===' && python -c 'from app.main import app; print(\"APP IMPORT OK\")' 2>&1 && echo '=== Running alembic ===' && alembic upgrade head 2>&1 && echo '=== Starting uvicorn ===' && exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --proxy-headers --forwarded-allow-ips='*' 2>&1"]
+CMD ["sh", "-c", "alembic upgrade head && exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --proxy-headers"]
