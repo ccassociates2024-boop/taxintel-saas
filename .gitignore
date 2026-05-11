@@ -43,3 +43,6 @@ Thumbs.db
 *.pem
 *.key
 *.p12
+backend/local_uploads/
+.claude/
+*.bat
