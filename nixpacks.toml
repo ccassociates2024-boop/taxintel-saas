@@ -1,0 +1,14 @@
+[phases.setup]
+nixPkgs = ["python312", "python312Packages.pip", "postgresql_16"]
+
+[phases.install]
+cmds = ["pip install -r backend/requirements.txt"]
+
+[phases.build]
+cmds = []
+
+[start]
+cmd = "cd backend && alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers"
+
+[variables]
+PYTHONPATH = "backend"

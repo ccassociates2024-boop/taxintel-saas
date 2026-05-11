@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# Environment
+.env
+.env.local
+.env.*.local
+backend/.env
+
+# Alembic
+backend/alembic/versions/__pycache__/
+
+# Node / Next.js
+node_modules/
+frontend/.next/
+frontend/out/
+frontend/.vercel/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# macOS / Windows
+.DS_Store
+Thumbs.db
+
+# Secrets — never commit these
+*.pem
+*.key
+*.p12

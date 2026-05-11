@@ -1,0 +1,919 @@
+:root {
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color-scheme: light;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app {
+  --bg: #f5f7fa;
+  --surface: #ffffff;
+  --surface-2: #eef2f6;
+  --border: #dbe2ea;
+  --text: #12202f;
+  --muted: #64748b;
+  --strong: #0c1724;
+  --accent: #2563eb;
+  --accent-2: #0891b2;
+  --good: #15803d;
+  --good-bg: #dcfce7;
+  --warn: #b45309;
+  --warn-bg: #fef3c7;
+  --bad: #b91c1c;
+  --bad-bg: #fee2e2;
+  --shadow: 0 18px 48px rgba(15, 23, 42, 0.08);
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app.dark {
+  color-scheme: dark;
+  --bg: #0d1117;
+  --surface: #151b23;
+  --surface-2: #1e2632;
+  --border: #2c3645;
+  --text: #e5edf6;
+  --muted: #96a3b5;
+  --strong: #ffffff;
+  --accent: #60a5fa;
+  --accent-2: #22d3ee;
+  --good: #4ade80;
+  --good-bg: rgba(34, 197, 94, 0.16);
+  --warn: #fbbf24;
+  --warn-bg: rgba(245, 158, 11, 0.18);
+  --bad: #fb7185;
+  --bad-bg: rgba(244, 63, 94, 0.18);
+  --shadow: 0 22px 56px rgba(0, 0, 0, 0.32);
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  width: 292px;
+  height: 100vh;
+  padding: 22px;
+  border-right: 1px solid var(--border);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  z-index: 20;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brandMark,
+.avatar,
+.recIcon {
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  background: linear-gradient(135deg, #2563eb, #0891b2);
+}
+
+.brandMark {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+}
+
+.brand strong,
+.brand span,
+.tenantCard strong,
+.tenantCard span {
+  display: block;
+}
+
+.brand strong {
+  color: var(--strong);
+  font-size: 1rem;
+}
+
+.brand span,
+.tenantCard span {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.nav {
+  display: grid;
+  gap: 6px;
+}
+
+.navItem {
+  width: 100%;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--muted);
+  background: transparent;
+  text-align: left;
+}
+
+.navItem:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.navItem.active {
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 24%, transparent);
+}
+
+.tenantCard {
+  margin-top: auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+
+.shell {
+  min-width: 0;
+  flex: 1;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 82px;
+  padding: 16px 28px;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  backdrop-filter: blur(18px);
+}
+
+.eyebrow {
+  margin: 0 0 2px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 0;
+  color: var(--strong);
+  font-size: 1.35rem;
+  line-height: 1.2;
+}
+
+h2 {
+  color: var(--strong);
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.topbarActions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search {
+  width: min(34vw, 390px);
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--muted);
+}
+
+.search input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  color: var(--text);
+  background: transparent;
+}
+
+.iconButton {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  background: var(--surface);
+}
+
+.dot {
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--bad);
+  border: 2px solid var(--surface);
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+}
+
+.menuButton,
+.sidebarClose {
+  display: none;
+}
+
+.content {
+  padding: 28px;
+}
+
+.metricGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.metric,
+.panel {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.metric {
+  min-height: 142px;
+  padding: 18px;
+  display: grid;
+  align-content: space-between;
+}
+
+.metricTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--muted);
+  gap: 10px;
+}
+
+.metric strong {
+  color: var(--strong);
+  font-size: 1.85rem;
+  line-height: 1;
+}
+
+.metric small {
+  color: var(--muted);
+}
+
+.metric.blue .metricTop {
+  color: var(--accent);
+}
+
+.metric.green .metricTop {
+  color: var(--good);
+}
+
+.metric.amber .metricTop {
+  color: var(--warn);
+}
+
+.metric.red .metricTop {
+  color: var(--bad);
+}
+
+.dashboardGrid {
+  display: grid;
+  gap: 16px;
+}
+
+.twoCol {
+  grid-template-columns: minmax(0, 1.35fr) minmax(360px, 0.65fr);
+}
+
+.healthGrid {
+  grid-template-columns: minmax(0, 0.95fr) minmax(420px, 1.05fr);
+}
+
+.panel {
+  min-width: 0;
+  padding: 18px;
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.panelHeader h2 {
+  margin-bottom: 0;
+}
+
+.textButton,
+.primaryButton {
+  min-height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.textButton {
+  padding: 0 10px;
+  color: var(--accent);
+  background: transparent;
+}
+
+.primaryButton {
+  padding: 0 14px;
+  color: #ffffff;
+  border-color: transparent;
+  background: var(--accent);
+}
+
+.clientList,
+.insightList,
+.actionQueue,
+.recommendationList,
+.calendarList,
+.noticeTable,
+.barList {
+  display: grid;
+  gap: 10px;
+}
+
+.clientRow,
+.insight,
+.actionItem,
+.recommendation,
+.calendarEvent,
+.noticeRow,
+.timelineStep {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface-2) 54%, transparent);
+}
+
+.clientRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto 18px;
+}
+
+.clientIdentity {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.clientIdentity strong,
+.clientIdentity span,
+.insight strong,
+.insight span,
+.actionItem strong,
+.actionItem span,
+.recommendation strong,
+.recommendation span,
+.calendarEvent strong,
+.calendarEvent span,
+.noticeRow strong,
+.noticeRow span,
+.timelineStep strong,
+.timelineStep span {
+  display: block;
+}
+
+.clientIdentity strong,
+.insight strong,
+.actionItem strong,
+.recommendation strong,
+.calendarEvent strong,
+.noticeRow strong,
+.timelineStep strong {
+  color: var(--strong);
+}
+
+.clientIdentity span,
+.insight span,
+.actionItem span,
+.recommendation span,
+.calendarEvent span,
+.noticeRow span,
+.timelineStep span,
+.rowMeta span,
+.recImpact span {
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.scoreBubble {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--strong);
+  font-weight: 800;
+  background:
+    radial-gradient(circle at center, var(--surface) 57%, transparent 59%),
+    conic-gradient(var(--good) var(--score), var(--border) 0);
+}
+
+.rowMeta {
+  text-align: right;
+}
+
+.rowMeta strong {
+  display: block;
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+.riskStack {
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+
+.riskSegment {
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.riskSegment.low {
+  background: #16a34a;
+}
+
+.riskSegment.medium {
+  background: #d97706;
+}
+
+.riskSegment.high {
+  background: #dc2626;
+}
+
+.insight svg {
+  color: var(--accent);
+  flex: 0 0 auto;
+}
+
+.healthHero {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+}
+
+.healthRing {
+  width: clamp(150px, 22vw, 220px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at center, var(--surface) 58%, transparent 60%),
+    conic-gradient(var(--good) var(--score), var(--border) 0);
+}
+
+.healthRing strong {
+  color: var(--strong);
+  font-size: 3rem;
+  line-height: 0.95;
+}
+
+.healthRing span {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.healthNarrative h2 {
+  margin-bottom: 8px;
+  font-size: 1.45rem;
+}
+
+.healthNarrative p,
+.assistantPanel p,
+.refundCard p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.statusPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill,
+.riskLabel {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.pill.good,
+.riskLabel.low {
+  color: var(--good);
+  background: var(--good-bg);
+}
+
+.pill.warn,
+.riskLabel.medium {
+  color: var(--warn);
+  background: var(--warn-bg);
+}
+
+.riskLabel.high {
+  color: var(--bad);
+  background: var(--bad-bg);
+}
+
+.barRow {
+  display: grid;
+  gap: 8px;
+}
+
+.barRow > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.barRow span {
+  color: var(--muted);
+}
+
+.barRow strong {
+  color: var(--strong);
+}
+
+.track,
+.compareBars {
+  position: relative;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--surface-2);
+}
+
+.track {
+  height: 10px;
+}
+
+.track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+.mismatchChart {
+  display: grid;
+  gap: 18px;
+}
+
+.mismatchItem {
+  display: grid;
+  gap: 7px;
+}
+
+.mismatchHead,
+.mismatchValues {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.mismatchHead span {
+  color: var(--strong);
+  font-weight: 800;
+}
+
+.mismatchHead strong,
+.mismatchValues {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.mismatchHead strong.ok {
+  color: var(--good);
+}
+
+.mismatchHead strong.warn {
+  color: var(--warn);
+}
+
+.mismatchHead strong.bad {
+  color: var(--bad);
+}
+
+.compareBars {
+  height: 18px;
+}
+
+.aisBar,
+.declaredBar {
+  position: absolute;
+  left: 0;
+  height: 50%;
+}
+
+.aisBar {
+  top: 0;
+  background: var(--accent);
+}
+
+.declaredBar {
+  bottom: 0;
+  background: var(--accent-2);
+}
+
+.actionItem {
+  grid-template-columns: 18px minmax(0, 1fr) auto;
+}
+
+.actionItem svg {
+  color: var(--warn);
+}
+
+.recommendation {
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+}
+
+.recIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+}
+
+.recImpact {
+  text-align: right;
+}
+
+.recImpact strong {
+  color: var(--good);
+}
+
+.forecast,
+.refundCard,
+.assistantPanel {
+  min-height: 290px;
+  display: grid;
+  align-content: center;
+  gap: 14px;
+  padding: 12px;
+}
+
+.forecast > strong,
+.refundCard > strong {
+  color: var(--strong);
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  line-height: 1;
+}
+
+.forecast > span,
+.refundCard > span {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.forecastGrid,
+.slaGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.slaGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.smallStat {
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+
+.smallStat span,
+.smallStat strong {
+  display: block;
+}
+
+.smallStat span {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.smallStat strong {
+  margin-top: 6px;
+  color: var(--strong);
+  font-size: 1.25rem;
+}
+
+.timeline {
+  position: relative;
+  display: grid;
+  gap: 12px;
+}
+
+.timelineStep svg {
+  color: var(--border);
+}
+
+.timelineStep.done svg {
+  color: var(--good);
+}
+
+.calendarEvent {
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr) auto;
+}
+
+.dateBox {
+  min-height: 48px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--accent);
+  background: var(--surface);
+  font-weight: 900;
+}
+
+.noticeRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 90px 90px auto;
+}
+
+.assistantPanel svg {
+  color: var(--accent);
+}
+
+.assistantPanel h2 {
+  margin-bottom: 0;
+  font-size: 1.8rem;
+}
+
+@media (max-width: 1180px) {
+  .metricGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .twoCol,
+  .healthGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 860px) {
+  .sidebar {
+    position: fixed;
+    transform: translateX(-102%);
+    transition: transform 180ms ease;
+    box-shadow: var(--shadow);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebarClose,
+  .menuButton {
+    display: grid;
+  }
+
+  .sidebarClose {
+    margin-left: auto;
+  }
+
+  .topbar {
+    padding: 14px 16px;
+  }
+
+  .topbarActions {
+    gap: 8px;
+  }
+
+  .search {
+    display: none;
+  }
+
+  .content {
+    padding: 16px;
+  }
+
+  .healthHero,
+  .clientRow,
+  .noticeRow {
+    grid-template-columns: 1fr;
+  }
+
+  .rowMeta,
+  .recImpact {
+    text-align: left;
+  }
+
+  .healthRing {
+    justify-self: center;
+  }
+}
+
+@media (max-width: 560px) {
+  .metricGrid,
+  .forecastGrid,
+  .slaGrid {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 1.1rem;
+  }
+
+  .topbar {
+    gap: 10px;
+  }
+
+  .topbarActions .avatar {
+    display: none;
+  }
+
+  .recommendation,
+  .calendarEvent,
+  .actionItem {
+    grid-template-columns: 1fr;
+  }
+
+  .metric strong {
+    font-size: 1.55rem;
+  }
+}
+

@@ -1,0 +1,10 @@
+services:
+  tax-recommendation-engine:
+    build: .
+    ports:
+      - "8010:8010"
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4.1}
+      ENABLE_OPENAI: ${ENABLE_OPENAI:-true}
+
