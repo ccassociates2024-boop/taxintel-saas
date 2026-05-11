@@ -2,7 +2,7 @@
 nixPkgs = ["python312", "python312Packages.pip", "libpq"]
 
 [phases.install]
-cmds = ["pip install -r backend/requirements.txt"]
+cmds = ["pip install --break-system-packages -r backend/requirements.txt"]
 
 [phases.build]
 cmds = []
